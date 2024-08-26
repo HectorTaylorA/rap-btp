@@ -1,0 +1,146 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+@UI: {
+    headerInfo: {
+        typeName: 'Employe',
+        typeNamePlural: 'Employees',
+        title: {
+            type: #STANDARD,
+            label: 'Employees',
+            value: 'EmployName'
+        },
+        description: {
+            type: #STANDARD,
+            label: '',
+            iconUrl: '',
+            criticality: '',
+            criticalityRepresentation: #WITHOUT_ICON,
+            value: '',
+            valueQualifier: '',
+            targetElement: '',
+            url: ''
+        }
+    }
+}
+annotate entity Z_C_HCM_MASTER_02 with
+{
+
+  @UI.facet: [{
+      id: 'Employees',
+      purpose: #STANDARD,
+      position: 10,
+      label: 'Employees',
+      type: #IDENTIFICATION_REFERENCE }]
+  @Search.defaultSearchElement: true
+  @UI: {
+      lineItem: [{
+      position: 10,
+      importance: #HIGH,
+      type: #STANDARD,
+      label: 'Employee Number' }],
+      identification: [{ position: 10, label: 'Employee Number' }]}
+  EmployNumber;
+
+  @UI: {
+    lineItem: [{
+    position: 20,
+    importance: #HIGH,
+    type: #STANDARD,
+    label: 'Employee Name' }],
+    identification: [{ position: 20, label: 'Employee Name' }],
+    selectionField: [{ position: 10 }] }
+  EmployName;
+
+  @UI: {
+  lineItem: [{
+  position: 30,
+  importance: #HIGH,
+  type: #STANDARD,
+  label: 'Departmen' }],
+  identification: [{ position: 30, label: 'Departmen' }],
+  selectionField: [{ position: 20 }] }
+  EmployDepartment;
+
+  @UI: {
+  lineItem: [{
+  position: 40,
+  importance: #HIGH,
+  type: #STANDARD,
+  label: 'Status' }],
+  identification: [{ position: 40, label: 'Status' }],
+  selectionField: [{ position: 30 }]}
+  Status;
+
+  @UI: {
+  lineItem: [{
+  position: 50,
+  importance: #MEDIUM,
+  type: #STANDARD,
+  label: 'Job Tittle' }],
+  identification: [{ position: 50, label: 'Job bTittle' }]}
+  JobTittle;
+
+  @UI: {
+  lineItem: [{
+  position: 60,
+  importance: #LOW,
+  type: #STANDARD,
+  label: 'Job Tittle' }],
+  identification: [{ position: 60, label: 'Jo bTittle' }]}
+  StartDate;
+
+  @UI: {
+  lineItem: [{
+  position: 70,
+  importance: #LOW,
+  type: #STANDARD,
+  label: 'End Date' }],
+  identification: [{ position: 70, label: 'End Date' }]}
+  EndDate;
+
+  @UI: {
+  lineItem: [{
+  position: 80,
+  importance: #MEDIUM,
+  type: #STANDARD,
+  label: 'Job Tittle' }],
+  identification: [{ position: 80, label: 'Email' }]}
+  Email;
+
+  @UI: {
+  lineItem: [{
+  position: 90,
+  importance: #HIGH,
+  type: #STANDARD,
+  label: 'Manager Number' }],
+  identification: [{ position: 90, label: 'Manager Number' }]}
+  ManagerNumber;
+
+  @UI: {
+  lineItem: [{
+  position: 100,
+  importance: #HIGH,
+  type: #STANDARD,
+  label: 'Manager Name' }],
+  identification: [{ position: 100, label: 'Manager Name' }]}
+  ManagerName;
+
+  @UI: {
+  lineItem: [{
+  position: 110,
+  importance: #MEDIUM,
+  type: #STANDARD,
+  label: 'ManagerDepartmen' }],
+  identification: [{ position: 110, label: 'Manager Departmen' }]}
+  ManagerDepartmen;
+
+  @UI.hidden: true
+  CreateddOn;
+  @UI.hidden: true
+  CreatedBy;
+  @UI.hidden: true
+  ChangedOn;
+  @UI.hidden: true
+  ChangedBy;
+
+}

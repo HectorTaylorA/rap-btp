@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>Z_MC_TRAVEL_LOG_02</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+    <STEXT>Message Class for Travel</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_MC_TRAVEL_LOG_02</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>Customer &amp;1 no existe</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_MC_TRAVEL_LOG_02</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>Fecha inicio &amp;1 debe ser mayor a la fecha del sistema</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_MC_TRAVEL_LOG_02</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>Fecha Inicio &amp;1 no puede ser mayor a la fecha Final &amp;2</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_MC_TRAVEL_LOG_02</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>Estatus del Travel no valido &amp;1</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_MC_TRAVEL_LOG_02</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>Travel &amp;1 Aceptado</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_MC_TRAVEL_LOG_02</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>Travel &amp;1 Rechazado</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_MC_TRAVEL_LOG_02</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>Estatus no valido para Booking &amp;1</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

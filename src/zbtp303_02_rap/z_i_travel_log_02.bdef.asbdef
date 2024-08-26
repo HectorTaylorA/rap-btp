@@ -1,0 +1,125 @@
+managed;
+//strict ( 2 ); //Uncomment this line in order to enable strict mode 2. The strict mode has two variants (strict(1), strict(2)) and is prerequisite to be future proof regarding syntax and to be able to release your BO.
+
+define behavior for Z_I_TRAVEL_LOG_02 alias Travel
+implementation in class zbp_i_travel_log_02 unique
+persistent table ztravel_log_02
+with additional save
+lock master
+authorization master ( instance )
+etag master LastChangedAt
+{
+  //Campos administrativos : readonly
+  field ( readonly ) LastChangedAt, LastChangedBy, CreatedAt, CreatedBy;
+  //campos obligatorios
+  field ( mandatory : create ) TravelId, AgencyId, OverallStatus, BookingFee, CurrencyCode;
+  // control campos dinamicos
+  field ( features : instance ) TravelId, OverallStatus;
+  //agregar valor numerico por el framework
+  //field ( numbering : managed ) TravelId;
+
+  create;
+  update;
+  delete;
+
+  //Validaciones de campos
+  validation validateCustomer on save { create; field CustomerId; }
+  validation validateDate on save { create; field BeginDate, EndDate; }
+  validation validateStatus on save { create; field OverallStatus; }
+
+  //Acciones
+  action ( features : instance ) acceptTravel result [1] $self;
+  action ( features : instance ) rejectTravel result [1] $self;
+
+  action createTravelByTemplate result [1] $self;
+
+  //field ( readonly ) TravelId;
+  association _Booking { create ( features : instance ); }
+
+  mapping for ztravel_log_02 //corresponding
+    {
+
+      // Si los campos se llaman igual en la tabla y en el CDS usar la sentencia corresponding
+      //Primero los alias del CDS y luego los campos de la tabla
+      travelId      = Travel_Id;
+      agencyId      = Agency_Id;
+      customerId    = Customer_Id;
+      beginDate     = Begin_Date;
+      endDate       = End_Date;
+      bookingFee    = Booking_Fee;
+      totalPrice    = Total_Price;
+      currencyCode  = Currency_Code;
+      description   = Description;
+      overallStatus = Overall_Status;
+      createdBy     = Created_By;
+      createdAt     = Created_At;
+      lastChangedBy = Last_Changed_By;
+      lastChangedAt = Last_Changed_At;
+    }
+}
+
+define behavior for Z_I_BOOKING_LOG_02 alias Booking
+implementation in class zbp_i_BOOKING_log_02 unique
+persistent table zbooking_log_02
+lock dependent by _Travel
+authorization dependent by _Travel
+etag master LastChangeAt
+{
+
+  //control de campos estaticos
+  field ( readonly ) TravelId;
+  field ( mandatory : create ) BookingId, CarrierId, ConnectionId, FlightDate, BookingStatus;
+  update;
+  delete;
+
+  //Validaciones
+  validation validateStatus on save { create; field BookingStatus; }
+
+  //  field ( readonly ) BookingId;
+  association _Travel { }
+  association _BookingSupp { create ( features : instance ); }
+
+  //Determinaciones al momento del guardado
+  determination calculateTotalFlightPrice on modify { field FlightPrice, CurrencyCode; }
+
+  mapping for zbooking_log_02
+    {
+      travelId      = travel_id;
+      bookingId     = Booking_Id;
+      bookingDate   = Booking_Date;
+      customerId    = Customer_Id;
+      carrierId     = Carrier_Id;
+      connectionId  = Connection_Id;
+      flightDate    = Flight_Date;
+      flightPrice   = Flight_Price;
+      currencyCode  = Currency_Code;
+      bookingStatus = Booking_Status;
+      lastChangeAt  = Last_Change_At;
+    }
+
+}
+
+define behavior for Z_I_BOOKSUPPL_LOG_02 alias Supplement
+implementation in class zbp_i_BOOKSUPPL_log_02 unique
+//persistent table zbooksupp_log_02
+with unmanaged save
+lock dependent by _Travel
+authorization dependent by _Travel
+etag master Lastchangedat
+{
+
+  //field ( readonly ) TravelId, BookingId;
+  field ( mandatory : create ) SupplementId, Price;
+
+  update;
+  delete;
+  field ( readonly ) TravelId, BookingId, BookingSupplementId;
+  association _Travel;
+  association _Booking;
+
+  //Determinaciones al momento del guardado
+  determination calculateTotalSupplPrice on modify { field Price, Currency; }
+
+  mapping for zbooksupp_log_02 corresponding;
+  //zlog_log_02
+}
